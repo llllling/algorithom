@@ -9,16 +9,31 @@ for i in range(M) :
     g[u][v] = 1
     g[v][u] = 1
 
-def DFS(graph, start) :
-    visited = []
+visited = []
+
+def DFS(graph, start, result) :
     need_visit = queue.LifoQueue()
-
     need_visit.put(start)
-
-    while len(need_visit) > 0 :
+    s = 0
+    check = False
+    while need_visit.qsize() > 0 :
         v = need_visit.get()
 
         if v not in visited :
+            check = True
             visited.append(v)
-            for i in graph[v] :
-                need_visit.put(graph[v])
+            for i in range(1, N + 1) :
+                if graph[v][i] == 1 :
+                    need_visit.put(i)
+                elif i not in visited:
+                    s = i
+    if check : 
+        result += 1
+        check = False
+    if s != 0 : 
+        DFS(graph, s, result)
+
+    return result    
+
+
+print(DFS(g, 1, 0))
