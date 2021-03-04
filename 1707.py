@@ -28,9 +28,10 @@ for i in range(K):
         a, b = map(int, sys.stdin.readline().rstrip().split())
         g[a].append(b)
         g[b].append(a)
-    for k in range(1, V + 1):
+    for k in range(1, V + 1):  # 연결 그래프가 아닐 수도 있으므로 각 정점 방문안한 곳 방문할 수 있도록,
         if vg[k] == 0:
             chk = BFS(g, k)
+            # 연결 그래프가 아닐 경우 만약 그래프가 2개로 분할되어 있는 경우 1번그래프는 no인데 2번이 yes일 경우 이 조건 안넣어주면 yes 출력됨.
             if chk == False:
                 break
     if chk:
