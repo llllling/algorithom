@@ -1,5 +1,4 @@
 import sys
-import queue
 T = int(sys.stdin.readline().rstrip())
 
 for i in range(T):
