@@ -1,9 +1,11 @@
 import sys
 import ast
 
-sysdata1 = sys.stdin.readline().rstrip()
-sysdata2 = sys.stdin.readline().rstrip()
-k = int(sys.stdin.readline().rstrip())
+f = open("./input.txt", 'r')
+sysdata1 = f.readline().rstrip()
+sysdata2 =  f.readline().rstrip()
+k = int(f.readline())
+f.close()
 
 id_list = ast.literal_eval(sysdata1)
 report = ast.literal_eval(sysdata2)
@@ -27,7 +29,7 @@ for item in report:
 
 for singoja in singo_info:
     singo_info[singoja]['singoList'] = list(set(singo_info[singoja]['singoList']))
-    singo_info = singo_info[singoja]['singoList'] 
+    singoList = singo_info[singoja]['singoList'] 
     for singoedId in singoList:
         singo_cnt[singoedId] += 1
 
@@ -43,4 +45,14 @@ for singoja in singo_info:
     answer[singo_info[singoja]['idIndex']] = stopIdCnt
     
 print(answer)
- 
+
+####best code 대박이다 ㅇ0ㅇ 
+# answer = [0] * len(id_list)    
+# reports = {x : 0 for x in id_list}
+
+# for r in set(report):
+#         reports[r.split()[1]] += 1
+
+# for r in set(report):
+#         if reports[r.split()[1]] >= k:
+#             answer[id_list.index(r.split()[0])] += 1
