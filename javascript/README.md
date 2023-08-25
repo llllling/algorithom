@@ -1,5 +1,7 @@
 # 자바스크립트 자료구조/알고리즘
 
+(이미지, 내용 출처 : 패스트캠퍼스 javascript 코딩테스트&자료구조 강의)
+
 ## 자료구조의 종류
 
 ### 선형 구조
@@ -229,8 +231,13 @@ function insertionSort(arr) {
   - 더 이상 쪼갤 수 없는 크기가 될 때까지 계속하여 분할한다
 
 - 동작 방식
+
   - 분할(Divide): 분할 작업은 단순히 배열의 크기를 절반으로 쪼개는 것이다.
   - 정복(Conquer): 두 개의 부분 배열을 “정렬된 하나의 배열”로 만든다.
+
+  * 각 부분 배열은 이미 정렬된 상태로 본다.
+  * 각 부분 배열에 대해 첫째 원소부터 시작하여 하나씩 확인한다.
+    ![병합정렬예제1](병합정렬예제1.PNG)
 
 * 시간 복잡도
 
@@ -242,18 +249,18 @@ function insertionSort(arr) {
 ```
 // 병합(merge) 수행 함수
 function merge(arr, left, mid, right) {
-  let i = left;
-  let j = mid + 1;
+  let i = left; //왼쪽 배열 인덱스
+  let j = mid + 1; //오른쪽 배열 인덱스
   let k = left; // 결과 배열의 인덱스
   while (i <= mid && j <= right) {
     if (arr[i] <= arr[j]) sorted[k++] = arr[i++];
     else sorted[k++] = arr[j++];
   }
-  // 왼쪽 배열에 대한 처리가 다 끝난 경우
+  // 왼쪽 배열에 대한 처리가 다 끝난 경우, 오른쪽 나머지값들 결과 배열에 추가
   if (i > mid) {
     for (; j <= right; j++) sorted[k++] = arr[j];
   }
-  // 오른쪽 배열에 대한 처리가 다 끝난 경우
+  // 오른쪽 배열에 대한 처리가 다 끝난 경우, 왼쪽 나머지값을 결과 배열에 추가
   else {
     for (; i <= mid; i++) sorted[k++] = arr[i];
   }
@@ -264,3 +271,23 @@ function merge(arr, left, mid, right) {
 }
 
 ```
+
+```
+// 병합 정렬(merge sort) 함수
+// 인자 값 : arr, 0, arr.length - 1
+function mergeSort(arr, left, right) {
+  // 원소가 1개인 경우, 해당 배열은 정렬이 된 상태로 이해 가능
+  if (left < right) {
+    // 원소가 2개 이상이라면
+    let mid = parseInt((left + right) / 2); // 2개의 부분 배열로 분할(divide)
+    mergeSort(arr, left, mid); // 왼쪽 부분 배열 정렬 수행(conquer)
+    mergeSort(arr, mid + 1, right); // 오른쪽 부분 배열 정렬 수행(conquer)
+    merge(arr, left, mid, right); // 정렬된 2개의 배열을 하나로 병합(combine)
+  }
+}
+
+```
+
+### 자바스크립트 정렬 라이브러리
+
+- sort() : 최악의 경우에도 시간복잡도 O(NlogN)을 보장, 알고리즘 및 코딩 테스트 문제 해결할 때 정렬 기능이 필요하다면 단순히 sort()함수 사용하는 거 권장, **sort사용 시 항상 정렬 기준 함수 명시**하는 습관 필요
