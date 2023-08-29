@@ -123,3 +123,5 @@ for (let i = 0; i< n; i++) {
 }
 console.log(summary);
 ```
+
+- _이미지의 모든 출처 => 패스트캠퍼스 UPSKILL : Javascript 코딩테스트 131개 예제 & CS지식으로 끝내기_
