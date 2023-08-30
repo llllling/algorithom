@@ -5,26 +5,23 @@ let input = fs
   .toString()
   .split("\n");
 
-let [n, m] = input[0].split(" ").map(Number);
-let arr = input[1].split(" ").map(Number);
+let [k, n] = input[0].split(" ").map(Number);
+let arr = input.slice(1).map(Number);
 
 let start = 0;
 let end = Math.max(...arr);
-
 let result = 0;
 while (start <= end) {
   let mid = Math.floor((start + end) / 2);
   let total = 0;
   for (x of arr) {
-    total += Math.max(x - mid, 0);
+    total += Math.floor(x / mid);
   }
-  if (total >= m) {
-    // 나무의 양이 충분한 경우 덜 자르기(높이 키우기)
-    result = mid;
-    start = mid + 1;
-  } else {
-    // 나무의 양이 부족한 경우 더 많이 자르기(높이 줄이기)
+  if (total < n) {
     end = mid - 1;
+  } else {
+    start = mid + 1;
+    result = mid;
   }
 }
 
