@@ -24,7 +24,7 @@ function dfs(arr, depth, start) {
     // start 지점부터 하나씩 원소 인덱스(index)를 확인하며
     if (visited[i]) continue; // [중복을 허용하지 않으므로] 이미 처리 된 원소라면 무시
     selected.push(i); // 현재 원소 선택
-    dfs(arr, depth + 1, i + 1); // 조합이므로, 재귀 함수 호출시 다음 인덱스(index)를 넣기
+    dfs(arr, depth + 1, i + 1); // 조합이므로, 재귀 함수 호출시 다음 인덱스(index)를 넣기, 중복이 아니므로 i+ 1부터
     selected.pop(); // 현재 원소 선택 취소
   }
 }
